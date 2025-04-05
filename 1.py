@@ -106,12 +106,12 @@ if menu_tabs:
             st.plotly_chart(virality_status, use_container_width=True)
 
         st.subheader("🏆 Top 10 Posts with Highest Virality Score")
-        data = pd.read_csv("post_virality_dataset.csv", usecols=['meme_id','text_content_type','platform','likes','shares','comments','virality_score'])
+        data = pd.read_csv(uploaded_file, usecols=['meme_id','text_content_type','platform','likes','shares','comments','virality_score'])
         data_sorted = data.sort_values(by='virality_score',ascending=False).head(10)
         write(data_sorted)
 
         st.subheader("📊 Average Engagement by Platform")
-        data1 = pd.read_csv("post_virality_dataset.csv",
+        data1 = pd.read_csv(uploaded_file,
                            usecols=['platform', 'likes', 'shares', 'comments','virality_score'])
         platform_avg = data1.groupby('platform')[['likes','shares','comments','virality_score']].mean()
         write(platform_avg)
